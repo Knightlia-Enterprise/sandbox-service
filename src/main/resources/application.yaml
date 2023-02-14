@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: Sandbox Service
+
+sandbox:
+  version: @project.version@
