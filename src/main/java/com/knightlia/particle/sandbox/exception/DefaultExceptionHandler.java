@@ -31,4 +31,10 @@ public class DefaultExceptionHandler {
     public ErrorResponse handleNicknameExistsException(NicknameExistsException e) {
         return new ErrorResponse(singletonList(e.getMessage()));
     }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ErrorResponse handleUserNotFoundException(UserNotFoundException e) {
+        return new ErrorResponse(singletonList(e.getMessage()));
+    }
 }

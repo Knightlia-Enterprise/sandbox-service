@@ -37,7 +37,9 @@ public abstract class AbstractTest {
 
     protected void setupTest() {
         sessionCache.put(mock(WebSocketSession.class), VALID_TOKEN);
+        sessionCache.put(mock(WebSocketSession.class), "token-3");
         userCache.put("token-2", "existing-nickname");
+        userCache.put("token-3", "websocket-user");
     }
 
     protected <T> ResponseEntity<T> GET(String path, Class<T> res) {

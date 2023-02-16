@@ -9,6 +9,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.annotation.DirtiesContext;
 
 import java.util.List;
 
@@ -68,12 +69,13 @@ class NicknameControllerTest extends AbstractTest {
     }
 
     @Test
+    @DirtiesContext
     void setNicknameSuccess200ReturnsUserListTest() {
         ResponseEntity<List<String>> response = POST("/nickname", headers(), request(), new ParameterizedTypeReference<>() {
         });
 
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
-        assertThat(response.getBody(), containsInAnyOrder("nickname", "existing-nickname"));
+        assertThat(response.getBody(), containsInAnyOrder("nickname", "existing-nickname", "websocket-user"));
     }
 
     private NicknameRequest request() {

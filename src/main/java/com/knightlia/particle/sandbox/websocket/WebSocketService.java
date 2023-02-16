@@ -1,6 +1,7 @@
 package com.knightlia.particle.sandbox.websocket;
 
 import com.github.benmanes.caffeine.cache.Cache;
+import com.knightlia.particle.sandbox.model.payload.MessagePayload;
 import com.knightlia.particle.sandbox.model.payload.MessageType;
 import com.knightlia.particle.sandbox.model.payload.TokenPayload;
 import com.knightlia.particle.sandbox.model.payload.UserListPayload;
@@ -11,8 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
-
-import java.util.Collection;
 
 @Service
 @RequiredArgsConstructor
@@ -47,7 +46,11 @@ public class WebSocketService extends TextWebSocketHandler {
 
     @EventListener
     public void broadcastUserList(UserListPayload payload) {
-        log.info("Broadcasting user list: size={}", payload.userList().size());
+        payloadPublisher.broadcast(sessionCache.asMap().keySet(), payload);
+    }
+
+    @EventListener
+    public void broadcastMessage(MessagePayload payload) {
         payloadPublisher.broadcast(sessionCache.asMap().keySet(), payload);
     }
 }
