@@ -2,6 +2,7 @@ package com.knightlia.particle.sandbox.websocket;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.sentry.Sentry;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -39,6 +40,7 @@ public class PayloadPublisher {
             session.sendMessage(payload);
         } catch (IOException e) {
             log.error("Failed to publish websocket payload: {}", e.getMessage(), e);
+            Sentry.captureException(e);
         }
     }
 
@@ -47,6 +49,7 @@ public class PayloadPublisher {
             return new TextMessage(objectMapper.writeValueAsString(payload));
         } catch (JsonProcessingException e) {
             log.error("Failed to serialise websocket payload: {}", e.getMessage(), e);
+            Sentry.captureException(e);
             return null;
         }
     }

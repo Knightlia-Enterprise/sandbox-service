@@ -1,2 +1,7 @@
+sentry:
+  environment: production
+  dsn: ${SANDBOX_SENTRY_DSN}
+  traces-sample-rate: 0.5
+
 sandbox:
   origins: https://sandbox.particlechat.com

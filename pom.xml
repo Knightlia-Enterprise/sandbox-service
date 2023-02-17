@@ -17,6 +17,7 @@
 
     <properties>
         <java.version>19</java.version>
+        <sentry.version>6.14.0</sentry.version>
     </properties>
 
     <dependencies>
@@ -53,6 +54,18 @@
             <groupId>org.apache.httpcomponents.client5</groupId>
             <artifactId>httpclient5</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <!-- Metrics -->
+        <dependency>
+            <groupId>io.sentry</groupId>
+            <artifactId>sentry-spring-boot-starter-jakarta</artifactId>
+            <version>${sentry.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.sentry</groupId>
+            <artifactId>sentry-logback</artifactId>
+            <version>${sentry.version}</version>
         </dependency>
     </dependencies>
 
