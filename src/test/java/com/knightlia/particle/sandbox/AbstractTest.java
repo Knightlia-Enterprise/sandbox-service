@@ -1,7 +1,9 @@
 package com.knightlia.particle.sandbox;
 
 import com.github.benmanes.caffeine.cache.Cache;
+import io.sentry.spring.boot.jakarta.SentryAutoConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -11,14 +13,16 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.web.socket.WebSocketSession;
 
 import java.net.URI;
 
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@EnableAutoConfiguration(exclude = SentryAutoConfiguration.class)
+@ActiveProfiles("TESTING")
 public abstract class AbstractTest {
 
     protected static final String VALID_TOKEN = "VALID_TOKEN";
