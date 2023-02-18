@@ -3,6 +3,7 @@ package com.knightlia.particle.sandbox;
 import com.github.benmanes.caffeine.cache.Cache;
 import io.sentry.spring.boot.jakarta.SentryAutoConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.autoconfigure.metrics.MetricsAutoConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -21,7 +22,7 @@ import java.net.URI;
 import static org.mockito.Mockito.mock;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@EnableAutoConfiguration(exclude = SentryAutoConfiguration.class)
+@EnableAutoConfiguration(exclude = {SentryAutoConfiguration.class, MetricsAutoConfiguration.class})
 @ActiveProfiles("TESTING")
 public abstract class AbstractTest {
 

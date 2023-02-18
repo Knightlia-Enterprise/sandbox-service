@@ -2,5 +2,11 @@ spring:
   application:
     name: Sandbox Service
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+
 sandbox:
   version: @project.version@
