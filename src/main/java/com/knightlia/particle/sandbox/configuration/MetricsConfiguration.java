@@ -11,6 +11,7 @@ import org.springframework.boot.actuate.metrics.cache.CacheMetricsRegistrar;
 import org.springframework.cache.caffeine.CaffeineCache;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -40,6 +41,7 @@ public class MetricsConfiguration {
     }
 
     @Bean
+    @Profile("!TESTING")
     public CacheMetricsRegistrarManager registerCacheMetrics(CacheMetricsRegistrar cacheMetricsRegistrar,
                                                              Cache<?, ?> sessionCache,
                                                              Cache<?, ?> userCache) {
